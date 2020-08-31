@@ -1,0 +1,16 @@
+#!/usr/bin/python
+import subprocess as sp
+import os
+
+# get current brightness level
+brightlevel = int(sp.Popen("xbacklight", shell=True, stdout=sp.PIPE).stdout.read().decode('utf-8').split(".")[0])
+
+# Inclremet brightness by a set ammount, but cap it at 100
+brightlevel = 100 if brightlevel  > 90 else brightlevel + 10
+
+# Update the brightness to the new incremented value
+os.system(f"xbacklight -set {brightlevel}")
+
+# Sent a notification that brightness was updated
+if not os.path.isfile('/home/davidk/.config/twmn/lock'):
+	os.system(f"twmnc -t 'Brightness' -c '{brightlevel}%' -d 400 && notify-lock")

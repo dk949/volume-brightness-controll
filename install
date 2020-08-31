@@ -1,0 +1,6 @@
+#!/bin/sh
+CURRENT=$PWD
+cd ~/bin
+rm volume-*
+rm brightness-*
+ln -s $(ls $CURRENT/* | awk '!/README.md|install|\.git/') .

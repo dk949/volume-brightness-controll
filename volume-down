@@ -1,10 +1,4 @@
-#!/usr/bin/python
-import subprocess as sp
-import os
+#!/bin/sh
 
-vollevel = int(sp.Popen("amixer sget 'Master'", shell=True, stdout=sp.PIPE).stdout.read().decode('utf-8').split(' ')[24].lstrip('[').rstrip('%]'))
-
-vollevel = 0 if vollevel < 5 else vollevel - 5
-
-os.system(f"amixer sset 'Master' {vollevel}% on &> /dev/null")
-os.system("refbar")
+amixer -q sset 'Master' 5%- on
+refbar

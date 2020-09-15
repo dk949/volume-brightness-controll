@@ -1,3 +1,8 @@
 #!/bin/sh
 xbacklight - 10%
-test -e "$HOME"/.config/twmn/lock || twmnc -t Brightness -c "$(xbacklight | cut -d'.' -f 1)"% -d 400 && notify-lock
+
+
+if [ ! -f "$HOME"/.config/twmn/lock ]; then
+	twmnc -t Brightness -c "$(xbacklight | cut -d'.' -f 1)"% -d 400
+	notify-lock
+fi

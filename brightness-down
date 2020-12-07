@@ -3,6 +3,6 @@ xbacklight - 10%
 
 
 if [ ! -f "$HOME"/.config/twmn/lock ]; then
-	twmnc -t Brightness -c "$(xbacklight | cut -d'.' -f 1)"% -d 400
+    notify-send "Brightness" "$(xbacklight | cut -d'.' -f 1)"% -t 400
 	notify-lock
 fi
